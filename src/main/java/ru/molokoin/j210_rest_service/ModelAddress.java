@@ -32,12 +32,12 @@ public class ModelAddress implements Serializable{
     private String model;
     @Column(name = "address", length = 100)
     private String address;
-    // @Column(name = "client_id")
-    // private Integer client_id;
-    @Basic(optional = false)
-    @JoinColumn(name = "client_id")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private ModelClient client;
+    @Column(name = "client_id")
+    private Integer client_id;
+    // @Basic(optional = false)
+    // @JoinColumn(name = "client_id")
+    // @ManyToOne(fetch = FetchType.LAZY)
+    // private ModelClient client;
     
     public Integer getId() {
         return id;
@@ -69,12 +69,12 @@ public class ModelAddress implements Serializable{
     public void setAddress(String address) {
         this.address = address;
     }
-    // public Integer getClient_id() {
-    //     return client_id;
-    // }
-    // public void setClient_id(Integer client_id) {
-    //     this.client_id = client_id;
-    // }
+    public Integer getClient_id() {
+        return client_id;
+    }
+    public void setClient_id(Integer client_id) {
+        this.client_id = client_id;
+    }
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -84,7 +84,7 @@ public class ModelAddress implements Serializable{
         result = prime * result + ((mac == null) ? 0 : mac.hashCode());
         result = prime * result + ((model == null) ? 0 : model.hashCode());
         result = prime * result + ((address == null) ? 0 : address.hashCode());
-        //result = prime * result + ((client_id == null) ? 0 : client_id.hashCode());
+        result = prime * result + ((client_id == null) ? 0 : client_id.hashCode());
         return result;
     }
     @Override
@@ -121,11 +121,11 @@ public class ModelAddress implements Serializable{
                 return false;
         } else if (!address.equals(other.address))
             return false;
-        // if (client_id == null) {
-        //     if (other.client_id != null)
-        //         return false;
-        // } else if (!client_id.equals(other.client_id))
-        //     return false;
+        if (client_id == null) {
+            if (other.client_id != null)
+                return false;
+        } else if (!client_id.equals(other.client_id))
+            return false;
         return true;
     }
     @Override
@@ -135,14 +135,14 @@ public class ModelAddress implements Serializable{
                 + "]";
     }
 
-    @Transient
-    public ModelClient getClient() {
-        return client;
-    }
+    // @Transient
+    // public ModelClient getClient() {
+    //     return client;
+    // }
 
-    public void setClient(ModelClient client) {
-        this.client = client;
-    }
+    // public void setClient(ModelClient client) {
+    //     this.client = client;
+    // }
 
     
 
